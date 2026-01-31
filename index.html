@@ -17,6 +17,8 @@
     :root {
       --brand-color: #00004D;
       --text-light: #ffffff;
+      --announce-height: 48px;
+      --nav-height: 64px;
     }
 
     * {
@@ -29,19 +31,42 @@
       font-family: 'Poppins', sans-serif;
       background-color: #000;
       color: var(--text-light);
+      /* ensure content isn't hidden behind fixed announcement + nav */
+      padding-top: calc(var(--announce-height) + var(--nav-height));
+    }
+
+    /* Global announcement (global header) */
+    .global-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--announce-height);
+      background: rgba(4, 6, 40, 0.95);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      z-index: 1003;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding: 0 1rem;
+      text-align: center;
     }
 
     /* Navbar */
     nav {
       position: fixed;
-      top: 0;
+      top: var(--announce-height);
+      height: var(--nav-height);
       width: 100%;
       background: rgba(0, 0, 104, 0);
-      padding: 0.8rem 2rem;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 1000;
+      z-index: 1002;
       backdrop-filter: blur(8px);
     }
 
@@ -68,7 +93,7 @@
 
     /* Hero Section */
     header {
-      height: 100vh;
+      min-height: calc(100vh - (var(--announce-height) + var(--nav-height)));
       background: url('assets/bg.png') center/cover no-repeat;
       position: relative;
       display: flex;
@@ -151,10 +176,19 @@
       nav ul {
         gap: 1rem;
       }
+      .global-header {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Global Header / Announcement -->
+  <div class="global-header" role="banner">
+    The greaterport.org website was made by a development team consisting of both me (@leemo.jeemo) and @hyp_4rr
+  </div>
 
   <!-- Navbar -->
   <nav>
